@@ -12,6 +12,8 @@ using namespace std;
 // Constants
 const int SZ_NAMES = 200;
 const int SZ_COLORS = 25;
+const int MIN_CHOICE = 1;
+const int MAX_CHOICE = 4;
 
 // Function prototypes
 int select_goat(list<Goat> trip);
@@ -29,12 +31,14 @@ int main()
     // Create a boolean
     bool again;
 
-    // Read & populate arrays for names and colors
+    // Read & populate array for names
     ifstream fin("names.txt");
     string names[SZ_NAMES];
     int i = 0;
     while (fin >> names[i++]);
     fin.close();
+
+    // Read & populate array for colors
     ifstream fin1("colors.txt");
     string colors[SZ_COLORS];
     i = 0;
@@ -43,14 +47,26 @@ int main()
 
     // Create & populate a trip of Goats using std::list of random size 8-15
     int tripSize = rand() % 8 + 8;
+
+    // Create a Goat trip using list
     list<Goat> trip;
+
+    // Create some variables to store the Goat's information
     int age;
     string name, color;
-    for (int i = 0; i < tripSize; i++) {
-        age = rand() % MAX_AGE;  // defined in Goat.h
+
+
+    for (int i = 0; i < tripSize; i++)
+    {
+        // Populate the variables
+        age = rand() % MAX_AGE;
         name = names[rand() % SZ_NAMES];
         color = colors[rand() % SZ_COLORS];
+
+        // Create a Goat object using constructor
         Goat tmp(name, age, color);
+
+        // Add the Goat object to the list
         trip.push_back(tmp);
     }
     
@@ -60,6 +76,7 @@ int main()
     {
         switch (sel)
         {
+            // Add a Goat
             case 1:
             {
                 cout << "Adding a goat.\n";
@@ -67,18 +84,31 @@ int main()
                 break;
             }
 
-            case 2:    
+            // Delete a Goat
+            case 2:
+            {
                 cout << "Removing a goat.\n";
                 delete_goat(trip);
                 break;
-            case 3:    
+            }
+
+            // Display the Goat đata
+            case 3:
+            {
                 cout << "Displaying goat data.\n";
                 display_trip(trip);
                 break;
+            }
+
+            // Other invalid choices
             default:
+            {
                 cout << "Invalid selection.\n";
                 break;
+            }
         }
+        
+        // Display the menu again
         sel = main_menu();
     }
     
@@ -86,20 +116,39 @@ int main()
     return 0;
 }
 
+// Function implementations
+/*
+    main_menu()
+    Display the menu of operations
+    Arguments: none
+    Return: 
+        - An int representing the user's choice
+*/
 int main_menu()
 {
+    // Display all the options
     cout << "*** GOAT MANAGER 3001 ***\n";
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
     cout << "[4] Quit\n";
+
+    // Prompt the user to enter a choice
     cout << "Choice --> ";
+
+    // Get the user's choice
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 4) {
+
+    // Validate the entered option
+    while (choice < MIN_CHOICE || choice > MAX_CHOICE)
+    {
+        // Display an error message
         cout << "Invalid, again --> ";
         cin >> choice;
     }
+
+    // Return the choice
     return choice;
 }
 
@@ -124,7 +173,8 @@ void add_goat(list<Goat> &trip, string nms[], string cls[])
     cout << "Goat added. New trip size: " << trip.size() << endl;
 }
 
-void display_trip(list<Goat> trp) {
+void display_trip(list<Goat> trp)
+{
     int i = 1;
     for (auto gt: trp)
         cout << "\t" 
@@ -134,7 +184,8 @@ void display_trip(list<Goat> trp) {
              << ", " << gt.get_color() << ")\n";
 }
 
-int select_goat(list<Goat> trp) {
+int select_goat(list<Goat> trp)
+{
     int input;
     cout << "Make a selection:\n";
     display_trip(trp);
