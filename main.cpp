@@ -1,3 +1,7 @@
+// COMSC-210 | Lab 28 | Dat Hoang Vien
+// IDE used: Visual Studio Code
+
+// Libraries and headers
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -5,8 +9,11 @@
 #include "Goat.h"
 using namespace std;
 
-const int SZ_NAMES = 200, SZ_COLORS = 25;
+// Constants
+const int SZ_NAMES = 200;
+const int SZ_COLORS = 25;
 
+// Function prototypes
 int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
@@ -120,7 +127,7 @@ int select_goat(list<Goat> trp) {
     display_trip(trp);
     cout << "Choice --> ";
     cin >> input;
-    while (input < 1 or input > trp.size()) {
+    while (input < 1 || input > trp.size()) {
         cout << "Invalid choice, again --> ";
         cin >> input;
     }
