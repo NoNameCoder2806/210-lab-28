@@ -13,7 +13,7 @@ using namespace std;
 const int SZ_NAMES = 200;
 const int SZ_COLORS = 25;
 const int MIN_CHOICE = 1;
-const int MAX_CHOICE = 4;
+const int MAX_CHOICE = 12;
 
 // Function prototypes
 int select_goat(list<Goat> trip);
@@ -72,7 +72,7 @@ int main()
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 4)
+    while (sel != MAX_CHOICE)
     {
         switch (sel)
         {
@@ -99,6 +99,22 @@ int main()
                 display_trip(trip);
                 break;
             }
+
+            // Sort Goats based on name
+
+            // Sort Goats based on age
+
+            // Display the younger Goat objects
+
+            // Display the oldest Goat objects
+
+            // Count Goat objects above a certain age
+
+            // Increase all Goat objects' age by 1
+
+            // Find a Goat object by name
+
+            // Display the Goat objects in reversed order
 
             // Other invalid choices
             default:
