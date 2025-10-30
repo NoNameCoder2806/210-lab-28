@@ -20,11 +20,16 @@ void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
 int main_menu();
 
-int main() {
+// Main function
+int main()
+{
+    // Call srand() and time()
     srand(time(0));
+
+    // Create a boolean
     bool again;
 
-    // read & populate arrays for names and colors
+    // Read & populate arrays for names and colors
     ifstream fin("names.txt");
     string names[SZ_NAMES];
     int i = 0;
@@ -36,7 +41,7 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
-    // create & populate a trip of Goats using std::list of random size 8-15
+    // Create & populate a trip of Goats using std::list of random size 8-15
     int tripSize = rand() % 8 + 8;
     list<Goat> trip;
     int age;
@@ -51,12 +56,17 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 4) {
-        switch (sel) {
+    while (sel != 4)
+    {
+        switch (sel)
+        {
             case 1:
+            {
                 cout << "Adding a goat.\n";
                 add_goat(trip, names, colors);
                 break;
+            }
+
             case 2:    
                 cout << "Removing a goat.\n";
                 delete_goat(trip);
@@ -76,7 +86,8 @@ int main() {
     return 0;
 }
 
-int main_menu() {
+int main_menu()
+{
     cout << "*** GOAT MANAGER 3001 ***\n";
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
@@ -92,7 +103,8 @@ int main_menu() {
     return choice;
 }
 
-void delete_goat(list<Goat> &trip) {
+void delete_goat(list<Goat> &trip)
+{
     cout << "DELETE A GOAT\n";
     int index = select_goat(trip);
     auto it = trip.begin();
@@ -101,7 +113,8 @@ void delete_goat(list<Goat> &trip) {
     cout << "Goat deleted. New trip size: " << trip.size() << endl;
 }
 
-void add_goat(list<Goat> &trip, string nms[], string cls[]) {
+void add_goat(list<Goat> &trip, string nms[], string cls[])
+{
     cout << "ADD A GOAT\n";
     int age = rand() % MAX_AGE;
     string nm = nms[rand() % SZ_NAMES];
