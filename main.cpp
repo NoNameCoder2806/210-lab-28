@@ -152,48 +152,114 @@ int main_menu()
     return choice;
 }
 
-void delete_goat(list<Goat> &trip)
-{
-    cout << "DELETE A GOAT\n";
-    int index = select_goat(trip);
-    auto it = trip.begin();
-    advance(it, index-1);
-    trip.erase(it);
-    cout << "Goat deleted. New trip size: " << trip.size() << endl;
-}
-
+/*
+    add_goat()
+    Add a Goat object into the Goat set (trip)
+    Arguments:
+        - trip: the set of Goat objects (passed by reference)
+        - nms: an array containing all the Goat names (passed by value)
+        - cls: an array containing all the Goat colors (passed by value)
+    Return: none
+*/
 void add_goat(list<Goat> &trip, string nms[], string cls[])
 {
+    // Display a message
     cout << "ADD A GOAT\n";
+
+    // Declare and populate some variables to store the Goat object's data
     int age = rand() % MAX_AGE;
     string nm = nms[rand() % SZ_NAMES];
     string cl = cls[rand() % SZ_COLORS];
+
+    // Create the Goat object
     Goat tmp(nm, age, cl);
+
+    // Add the Goat object into the trip
     trip.push_back(tmp);
+
+    // Display a message notifying the addition
     cout << "Goat added. New trip size: " << trip.size() << endl;
 }
 
+/*
+    delete_goat()
+    Delete a Goat object from the Goat set (trip)
+    Arguments:
+        - trip: the set of Goat objects (passed by reference)
+    Return: none
+*/
+void delete_goat(list<Goat> &trip)
+{
+    // Display a message
+    cout << "DELETE A GOAT\n";
+
+    // Declare an int and store the Goat to delete
+    int index = select_goat(trip);
+
+    // Declare an iterator and advance it to the index
+    auto it = trip.begin();
+    advance(it, index-1);
+
+    // Delete the Goat object from the list
+    trip.erase(it);
+
+    // Display a message notifying the deletion
+    cout << "Goat deleted. New trip size: " << trip.size() << endl;
+}
+
+/*
+    display_trip()
+    Display the whole Goat set
+    Arguments: 
+        - trp: the set of Goat objects (passed by value)
+    Return: none
+*/
 void display_trip(list<Goat> trp)
 {
+    // Create an int counter
     int i = 1;
+
+    // Iterate through the trip
     for (auto gt: trp)
+    {
+        // Display all the Goat objects
         cout << "\t" 
              << "[" << i++ << "] "
              << gt.get_name() 
              << " (" << gt.get_age() 
              << ", " << gt.get_color() << ")\n";
+    }
 }
 
+/*
+    select_goat()
+    Allow user to select a Goat object from the trip
+    Arguments:
+        - trp: the set of Goat objects (passed by value)
+    Return:
+        - the index of the Goat in the set
+*/
 int select_goat(list<Goat> trp)
 {
+    // Create an int to store the user's input
     int input;
+
+    // Display the Goat trip
     cout << "Make a selection:\n";
     display_trip(trp);
+
+    // Prompt the user to select the Goat
     cout << "Choice --> ";
     cin >> input;
-    while (input < 1 || input > trp.size()) {
+
+    // Validate the input
+    while (input < 1 || input > trp.size())
+    {
+        // Prompt the user to enter a new choice
         cout << "Invalid choice, again --> ";
         cin >> input;
     }
+
+    // Return the selected index
     return input;
 }
