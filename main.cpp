@@ -521,26 +521,25 @@ void countAboveAge(const list<Goat> &trip)
 }
 
 /*
+    increaseAge()
+    Increase all the goats age by 1
+    Arguments:
+        - trip: the list of Goat objects (passed by reference)
+    Return: none
 */
 void increaseAge(list<Goat> &trip)
 {
     // Display a message
     cout << " --- INCREASE GOATS AGE BY 1 --- " << endl;
 
-    // Iterate and increase all goats age by 1
-    auto it = trip.begin();
-
-    // Iterate until we reach the end
-    while (it != trip.end())
+    // Use for_each() from <algorithm> to modify the goats age
+    for_each(trip.begin(), trip.end(), [](Goat &g)
     {
-        // Check for the current age
-        if (it->get_age() < MAX_AGE)
+        // Check the age limit
+        if (g.get_age() < MAX_AGE)
         {
             // Increase the age by 1
-            it->set_age(it->get_age() + 1);
+            g.set_age(g.get_age() + 1);
         }
-        
-        // Move to the next goat object
-        ++it;
-    }
+    });
 }
