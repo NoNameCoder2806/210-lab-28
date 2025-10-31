@@ -16,7 +16,7 @@ using namespace std;
 const int SZ_NAMES = 200;
 const int SZ_COLORS = 25;
 const int MIN_CHOICE = 1;
-const int MAX_CHOICE = 11;
+const int MAX_CHOICE = 12;
 
 // Function prototypes
 int select_goat(list<Goat> trip);
@@ -31,6 +31,7 @@ void displayOldest(const list<Goat> &trip);
 void countAboveAge(const list<Goat> &trip);
 void increaseAge(list<Goat> &trip);
 void searchNames(const list<Goat> &trip);
+void averageAge(const list<Goat> &trip);
 
 // Main function
 int main()
@@ -166,7 +167,16 @@ int main()
                 break;
             }
 
+            // Find the average age of the goats
+            case 11:
+            {
+                cout << "Calculate the goats' average age.\n";
+                averageAge(trip);
+                break;
+            }
+
             // Display the Goat objects in reversed order
+            case 12:
 
             // Other invalid choices
             default:
@@ -206,7 +216,8 @@ int main_menu()
     cout << "[8] Count and display goats above a certain age.\n";
     cout << "[9] Increase goats age by 1.\n";
     cout << "[10] Search for goats by name.\n";
-    cout << "[11] Quit.\n";
+    cout << "[11] Display goats' average age.\n";
+    cout << "[12] Quit.\n";
 
     // Prompt the user to enter a choice
     cout << "Choice --> ";
@@ -622,5 +633,5 @@ void averageAge(const list<Goat> &trip)
     });
 
     // Display a message
-    cout << "The average age of the goat trip is: " << (double) sum / (double) trip.size();
+    cout << "The average age of the goat trip is: " << (double) sum / (double) trip.size() << endl;
 }
