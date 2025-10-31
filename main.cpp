@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iomanip>
 #include <list>
+#include <algorithm>
 #include "Goat.h"
 using namespace std;
 
@@ -13,7 +14,7 @@ using namespace std;
 const int SZ_NAMES = 200;
 const int SZ_COLORS = 25;
 const int MIN_CHOICE = 1;
-const int MAX_CHOICE = 12;
+const int MAX_CHOICE = 5;
 
 // Function prototypes
 int select_goat(list<Goat> trip);
@@ -111,12 +112,6 @@ int main()
             }
 
             // Sort Goats based on age
-            case 5:
-            {
-                cout << "Sorting goat age.\n";
-                sortAge(trip);
-                break;
-            }
 
             // Display the younger Goat objects
 
@@ -161,7 +156,8 @@ int main_menu()
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
-    cout << "[4] Quit\n";
+    cout << "[4] Sort goats based on names\n";
+    cout << "[5] Quit\n";
 
     // Prompt the user to enter a choice
     cout << "Choice --> ";
@@ -194,7 +190,7 @@ int main_menu()
 void add_goat(list<Goat> &trip, string nms[], string cls[])
 {
     // Display a message
-    cout << "ADD A GOAT\n";
+    cout << " --- ADD A GOAT --- \n";
 
     // Declare and populate some variables to store the Goat object's data
     int age = rand() % MAX_AGE;
@@ -221,7 +217,7 @@ void add_goat(list<Goat> &trip, string nms[], string cls[])
 void delete_goat(list<Goat> &trip)
 {
     // Display a message
-    cout << "DELETE A GOAT\n";
+    cout << " --- DELETE A GOAT --- \n";
 
     // Declare an int and store the Goat to delete
     int index = select_goat(trip);
@@ -300,7 +296,11 @@ int select_goat(list<Goat> trp)
 */
 void sortNames(list<Goat> &trip)
 {
-
+    // Call the built-in sort() from list
+    trip.sort();
 }
 
-void sortAge(list<Goat> &trip);
+void sortAge(list<Goat> &trip)
+{
+
+}
