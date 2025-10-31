@@ -14,7 +14,7 @@ using namespace std;
 const int SZ_NAMES = 200;
 const int SZ_COLORS = 25;
 const int MIN_CHOICE = 1;
-const int MAX_CHOICE = 7;
+const int MAX_CHOICE = 8;
 
 // Function prototypes
 int select_goat(list<Goat> trip);
@@ -24,7 +24,8 @@ void display_trip(list<Goat> trip);
 int main_menu();
 void sortNames(list<Goat> &trip);
 void sortAge(list<Goat> &trip);
-void displayYoungest(const list<Goat>& trip);
+void displayYoungest(const list<Goat> &trip);
+void displayOldest(const list<Goat> &trip);
 
 // Main function
 int main()
@@ -129,6 +130,12 @@ int main()
             }
 
             // Display the oldest Goat objects
+            case 7:
+            {
+                cout << "Displaying the oldest goats.\n";
+                displayOldest(trip);
+                break;
+            }
 
             // Count Goat objects above a certain age
 
@@ -172,7 +179,8 @@ int main_menu()
     cout << "[4] Sort goats by names\n";
     cout << "[5] Sort goats by age\n";
     cout << "[6] Display the youngest goats\n";
-    cout << "[7] Quit\n";
+    cout << "[7] Display the oldest goats\n";
+    cout << "[8] Quit\n";
 
     // Prompt the user to enter a choice
     cout << "Choice --> ";
@@ -371,6 +379,50 @@ void displayYoungest(const list<Goat> &trip)
     {
         // Check the goats' age
         if (g.get_age() == min_age)
+        {
+            // Display all the Goat objects
+            cout << "\t" 
+                << "[" << i++ << "] "
+                << g.get_name() 
+                << " (" << g.get_age() 
+                << ", " << g.get_color() << ")\n";
+        }
+    }
+}
+
+/*
+    displayOldest()
+    Display all the oldest goats in the list
+    Arguments:
+        - trip: the list of Goat objects (passed by const reference)
+    Return: none
+*/
+void displayOldest(const list<Goat> &trip)
+{
+    // Declare a variable to hold the min age
+    int max_age = 0;
+
+    // Iterate through the list and store the min age
+    auto max_it = max_element(trip.begin(), trip.end(), [](const Goat &a, const Goat &b)
+    {
+        // Create a lambda and compare the age between the 2 goats
+        return a.get_age() < b.get_age();
+
+        // Note: for both the min_element() and max_element() function,
+        // the first object has to be less than / smaller than the second object
+    });
+
+    // Store the min age
+    max_age = max_it->get_age();
+
+    // Create a counter
+    int i = 1;
+
+    // Iterate through the list
+    for (auto g : trip)
+    {
+        // Check the goats' age
+        if (g.get_age() == max_age)
         {
             // Display all the Goat objects
             cout << "\t" 
