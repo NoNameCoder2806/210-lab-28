@@ -14,7 +14,7 @@ using namespace std;
 const int SZ_NAMES = 200;
 const int SZ_COLORS = 25;
 const int MIN_CHOICE = 1;
-const int MAX_CHOICE = 10;
+const int MAX_CHOICE = 11;
 
 // Function prototypes
 int select_goat(list<Goat> trip);
@@ -28,6 +28,7 @@ void displayYoungest(const list<Goat> &trip);
 void displayOldest(const list<Goat> &trip);
 void countAboveAge(const list<Goat> &trip);
 void increaseAge(list<Goat> &trip);
+void searchNames(const list<Goat> &trip);
 
 // Main function
 int main()
@@ -156,6 +157,12 @@ int main()
             }
 
             // Find a Goat object by name
+            case 10:
+            {
+                cout << "Search for goats by name.\n";
+                searchNames(trip);
+                break;
+            }
 
             // Display the Goat objects in reversed order
 
@@ -196,7 +203,8 @@ int main_menu()
     cout << "[7] Display the oldest goats\n";
     cout << "[8] Count and display goats above a certain age.\n";
     cout << "[9] Increase goats age by 1.\n";
-    cout << "[10] Quit.\n";
+    cout << "[10] Search for goats by name.\n";
+    cout << "[11] Quit.\n";
 
     // Prompt the user to enter a choice
     cout << "Choice --> ";
