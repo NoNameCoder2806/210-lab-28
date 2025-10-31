@@ -14,7 +14,7 @@ using namespace std;
 const int SZ_NAMES = 200;
 const int SZ_COLORS = 25;
 const int MIN_CHOICE = 1;
-const int MAX_CHOICE = 6;
+const int MAX_CHOICE = 7;
 
 // Function prototypes
 int select_goat(list<Goat> trip);
@@ -24,6 +24,7 @@ void display_trip(list<Goat> trip);
 int main_menu();
 void sortNames(list<Goat> &trip);
 void sortAge(list<Goat> &trip);
+void displayYoungest(const list<Goat>& trip);
 
 // Main function
 int main()
@@ -119,7 +120,13 @@ int main()
                 break;
             }
 
-            // Display the younger Goat objects
+            // Display the youngest Goat objects
+            case 6:
+            {
+                cout << "Displaying the youngest goats.\n";
+                displayYoungest(trip);
+                break;
+            }
 
             // Display the oldest Goat objects
 
@@ -164,7 +171,8 @@ int main_menu()
     cout << "[3] List goats\n";
     cout << "[4] Sort goats by names\n";
     cout << "[5] Sort goats by age\n";
-    cout << "[6] Quit\n";
+    cout << "[6] Display the youngest goats\n";
+    cout << "[7] Quit\n";
 
     // Prompt the user to enter a choice
     cout << "Choice --> ";
@@ -331,4 +339,45 @@ void sortAge(list<Goat> &trip)
     
     // Display a message
     cout << " --- SORTED GOATS BY AGE! --- \n";
+}
+
+/*
+    displayYoungest()
+    Display all the youngest goats in the list
+    Arguments:
+        - trip: the list of Goat objects (passed by const reference)
+    Return: none
+*/
+void displayYoungest(const list<Goat> &trip)
+{
+    // Declare a variable to hold the min age
+    int min_age = MAX_AGE;
+
+    // Iterate through the list and store the min age
+    auto min_it = min_element(trip.begin(), trip.end(), [](const Goat &a, const Goat &b)
+    {
+        // Create a lambda and compare the age between the 2 goats
+        return a.get_age() < b.get_age();
+    });
+
+    // Store the min age
+    min_age = min_it->get_age();
+
+    // Create a counter
+    int i = 1;
+
+    // Iterate through the list
+    for (auto g : trip)
+    {
+        // Check the goats' age
+        if (g.get_age() == min_age)
+        {
+            // Display all the Goat objects
+            cout << "\t" 
+                << "[" << i++ << "] "
+                << g.get_name() 
+                << " (" << g.get_age() 
+                << ", " << g.get_color() << ")\n";
+        }
+    }
 }
