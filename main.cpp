@@ -14,7 +14,7 @@ using namespace std;
 const int SZ_NAMES = 200;
 const int SZ_COLORS = 25;
 const int MIN_CHOICE = 1;
-const int MAX_CHOICE = 5;
+const int MAX_CHOICE = 6;
 
 // Function prototypes
 int select_goat(list<Goat> trip);
@@ -106,12 +106,18 @@ int main()
             // Sort Goats based on name
             case 4:
             {
-                cout << "Sorting goat names.\n";
+                cout << "Sorting goat by name.\n";
                 sortNames(trip);
                 break;
             }
 
             // Sort Goats based on age
+            case 5:
+            {
+                cout << "Sorting goat by age.\n";
+                sortAge(trip);
+                break;
+            }
 
             // Display the younger Goat objects
 
@@ -156,8 +162,9 @@ int main_menu()
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
-    cout << "[4] Sort goats based on names\n";
-    cout << "[5] Quit\n";
+    cout << "[4] Sort goats by names\n";
+    cout << "[5] Sort goats by age\n";
+    cout << "[6] Quit\n";
 
     // Prompt the user to enter a choice
     cout << "Choice --> ";
@@ -180,9 +187,9 @@ int main_menu()
 
 /*
     add_goat()
-    Add a Goat object into the Goat set (trip)
+    Add a Goat object into the Goat list (trip)
     Arguments:
-        - trip: the set of Goat objects (passed by reference)
+        - trip: the list of Goat objects (passed by reference)
         - nms: an array containing all the Goat names (passed by value)
         - cls: an array containing all the Goat colors (passed by value)
     Return: none
@@ -209,9 +216,9 @@ void add_goat(list<Goat> &trip, string nms[], string cls[])
 
 /*
     delete_goat()
-    Delete a Goat object from the Goat set (trip)
+    Delete a Goat object from the Goat list (trip)
     Arguments:
-        - trip: the set of Goat objects (passed by reference)
+        - trip: the list of Goat objects (passed by reference)
     Return: none
 */
 void delete_goat(list<Goat> &trip)
@@ -235,9 +242,9 @@ void delete_goat(list<Goat> &trip)
 
 /*
     display_trip()
-    Display the whole Goat set
+    Display the whole Goat list
     Arguments: 
-        - trp: the set of Goat objects (passed by value)
+        - trp: the list of Goat objects (passed by value)
     Return: none
 */
 void display_trip(list<Goat> trp)
@@ -261,9 +268,9 @@ void display_trip(list<Goat> trp)
     select_goat()
     Allow user to select a Goat object from the trip
     Arguments:
-        - trp: the set of Goat objects (passed by value)
+        - trp: the list of Goat objects (passed by value)
     Return:
-        - the index of the Goat in the set
+        - the index of the Goat in the list
 */
 int select_goat(list<Goat> trp)
 {
@@ -292,15 +299,36 @@ int select_goat(list<Goat> trp)
 
 /*
     sortNames()
-    Sort the Goat obbjects based on names
+    Sort the Goat objects by name
+    Arguments:
+        - trip: the list of Goat objects (passed by reference)
+    Return: none
 */
 void sortNames(list<Goat> &trip)
 {
     // Call the built-in sort() from list
     trip.sort();
+
+    // Display a message
+    cout << " --- SORTED GOATS BY NAME! --- \n";
 }
 
+/*
+    sortAge()
+    Sort the Goat objects by age
+    Arguments:
+        - trip: the list of Goat objects (passed by reference)
+    Return: none
+*/
 void sortAge(list<Goat> &trip)
 {
-
+    // Call the built-in sort() from list
+    trip.sort([](const Goat &a, const Goat &b)
+    {   
+        // Create a lambda that compares the age of the 2 Goat objects
+        return a.get_age() < b.get_age();
+    });
+    
+    // Display a message
+    cout << " --- SORTED GOATS BY AGE! --- \n";
 }
