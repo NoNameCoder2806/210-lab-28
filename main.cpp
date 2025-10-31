@@ -14,7 +14,7 @@ using namespace std;
 const int SZ_NAMES = 200;
 const int SZ_COLORS = 25;
 const int MIN_CHOICE = 1;
-const int MAX_CHOICE = 8;
+const int MAX_CHOICE = 9;
 
 // Function prototypes
 int select_goat(list<Goat> trip);
@@ -187,7 +187,8 @@ int main_menu()
     cout << "[5] Sort goats by age\n";
     cout << "[6] Display the youngest goats\n";
     cout << "[7] Display the oldest goats\n";
-    cout << "[8] Quit\n";
+    cout << "[8] Count and display goats above a certain age.\n";
+    cout << "[9] Quit\n";
 
     // Prompt the user to enter a choice
     cout << "Choice --> ";
@@ -450,5 +451,48 @@ void displayOldest(const list<Goat> &trip)
 */
 void countAboveAge(const list<Goat> &trip)
 {
+    // Declare variables to hold the age and count
+    int age = 0;
+    int count = 0;
 
+    // Prompt user to enter an age
+    cout << " - Enter an age: ";
+    cin >> age;
+    cin.ignore(1000, 10);
+
+    // Validate the input
+    while(age < 0 || age > MAX_AGE)
+    {
+        // Display an error message and prompt the user to enter a new age
+        cout << "Error! Please enter a valid age (0-20): ";
+        cin >> age;
+        cin.ignore(1000, 10);
+    }
+
+    // Count the goats
+    count = count_if(trip.begin(), trip.end(), [age](const Goat &g)
+    {
+        return g.get_age() > age;
+    });
+
+    // Display a message
+    cout << "There are " << count << " goat(s) above the age of " << age << endl;
+
+    // Declare another counter
+    int i = 1;
+
+    // Iterate through the list
+    for (auto g: trip)
+    {
+        // Check the goat's age
+        if (g.get_age() > age)
+        {
+            // Display all the Goat objects
+            cout << "\t" 
+                << "[" << i++ << "] "
+                << g.get_name() 
+                << " (" << g.get_age() 
+                << ", " << g.get_color() << ")\n";
+        }
+    }
 }
