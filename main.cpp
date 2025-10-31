@@ -21,6 +21,8 @@ void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
 int main_menu();
+void sortNames(list<Goat> &trip);
+void sortAge(list<Goat> &trip);
 
 // Main function
 int main()
@@ -101,8 +103,20 @@ int main()
             }
 
             // Sort Goats based on name
+            case 4:
+            {
+                cout << "Sorting goat names.\n";
+                sortNames(trip);
+                break;
+            }
 
             // Sort Goats based on age
+            case 5:
+            {
+                cout << "Sorting goat age.\n";
+                sortAge(trip);
+                break;
+            }
 
             // Display the younger Goat objects
 
@@ -279,3 +293,14 @@ int select_goat(list<Goat> trp)
     // Return the selected index
     return input;
 }
+
+/*
+    sortNames()
+    Sort the Goat obbjects based on names
+*/
+void sortNames(list<Goat> &trip)
+{
+
+}
+
+void sortAge(list<Goat> &trip);
