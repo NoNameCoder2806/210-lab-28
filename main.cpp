@@ -338,6 +338,9 @@ int select_goat(list<Goat> trp)
 */
 void sortNames(list<Goat> &trip)
 {
+    // Display a message
+    cout << " --- SORT GOATS BY NAME --- \n";
+
     // Call the built-in sort() from list
     trip.sort();
 
@@ -354,6 +357,9 @@ void sortNames(list<Goat> &trip)
 */
 void sortAge(list<Goat> &trip)
 {
+    // Display a message
+    cout << " --- SORT GOATS BY AGE --- \n";
+
     // Call the built-in sort() from list
     trip.sort([](const Goat &a, const Goat &b)
     {   
@@ -374,6 +380,9 @@ void sortAge(list<Goat> &trip)
 */
 void displayYoungest(const list<Goat> &trip)
 {
+    // Display a message
+    cout << " --- DISPLAY THE YOUNGEST GOATS IN THE TRIP --- \n";
+
     // Declare a variable to hold the min age
     int min_age = MAX_AGE;
 
@@ -415,6 +424,9 @@ void displayYoungest(const list<Goat> &trip)
 */
 void displayOldest(const list<Goat> &trip)
 {
+    // Display a message
+    cout << " --- DISPLAY THE OLDEST GOATS IN THE TRIP --- \n";
+
     // Declare a variable to hold the min age
     int max_age = 0;
 
@@ -459,6 +471,9 @@ void displayOldest(const list<Goat> &trip)
 */
 void countAboveAge(const list<Goat> &trip)
 {
+    // Display a message
+    cout << " --- COUNT AND DISPLAY GOATS ABOVE A CERTAIN AGE --- \n";
+
     // Declare variables to hold the age and count
     int age = 0;
     int count = 0;
@@ -509,5 +524,23 @@ void countAboveAge(const list<Goat> &trip)
 */
 void increaseAge(list<Goat> &trip)
 {
-    
+    // Display a message
+    cout << " --- INCREASE GOATS AGE BY 1 --- " << endl;
+
+    // Iterate and increase all goats age by 1
+    auto it = trip.begin();
+
+    // Iterate until we reach the end
+    while (it != trip.end())
+    {
+        // Check for the current age
+        if (it->get_age() < MAX_AGE)
+        {
+            // Increase the age by 1
+            it->set_age(it->get_age() + 1);
+        }
+        
+        // Move to the next goat object
+        ++it;
+    }
 }
