@@ -14,7 +14,7 @@ using namespace std;
 const int SZ_NAMES = 200;
 const int SZ_COLORS = 25;
 const int MIN_CHOICE = 1;
-const int MAX_CHOICE = 9;
+const int MAX_CHOICE = 10;
 
 // Function prototypes
 int select_goat(list<Goat> trip);
@@ -27,6 +27,7 @@ void sortAge(list<Goat> &trip);
 void displayYoungest(const list<Goat> &trip);
 void displayOldest(const list<Goat> &trip);
 void countAboveAge(const list<Goat> &trip);
+void increaseAge(list<Goat> &trip);
 
 // Main function
 int main()
@@ -141,12 +142,18 @@ int main()
             // Count Goat objects above a certain age
             case 8:
             {
-                cout << "Count and display goats above a certain age.\n";
+                cout << "Counting and displaying goats above a certain age.\n";
                 countAboveAge(trip);
                 break;
             }
 
             // Increase all Goat objects' age by 1
+            case 9:
+            {
+                cout << "Increasing all goats' age.\n";
+                increaseAge(trip);
+                break;
+            }
 
             // Find a Goat object by name
 
@@ -188,7 +195,8 @@ int main_menu()
     cout << "[6] Display the youngest goats\n";
     cout << "[7] Display the oldest goats\n";
     cout << "[8] Count and display goats above a certain age.\n";
-    cout << "[9] Quit\n";
+    cout << "[9] Increase goats age by 1.\n";
+    cout << "[10] Quit.\n";
 
     // Prompt the user to enter a choice
     cout << "Choice --> ";
@@ -495,4 +503,11 @@ void countAboveAge(const list<Goat> &trip)
                 << ", " << g.get_color() << ")\n";
         }
     }
+}
+
+/*
+*/
+void increaseAge(list<Goat> &trip)
+{
+    
 }
