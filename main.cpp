@@ -8,6 +8,8 @@
 #include <list>
 #include <algorithm>
 #include "Goat.h"
+#include <string>
+#include <numeric>
 using namespace std;
 
 // Constants
@@ -550,4 +552,75 @@ void increaseAge(list<Goat> &trip)
             g.set_age(g.get_age() + 1);
         }
     });
+}
+
+/*
+    searchNames()
+    Search for goats by name
+    Arguments:
+        - trip: the list of Goat objects (passed by const reference)
+    Return: none
+*/
+void searchNames(const list<Goat> &trip)
+{
+    // Display a message
+    cout << " --- SEARCH FOR GOATS BY NAME --- " << endl;
+
+    // Prompt the user to enter the name
+    string name = "";
+    cout << "Enter a name: ";
+    cin.ignore(1000, 10);
+    getline(cin, name);
+
+    // Create an iterator and a counter
+    int i = 1;
+    auto it = trip.begin();
+    
+    // Declare a loop to iterate through the list
+    while (it != trip.end())
+    {
+        // Use find_if() to search for the goats with the name
+        it = find_if(it, trip.end(), [&](const Goat& g)
+        {
+            return g.get_name() == name;
+        });
+
+        // Check if the iterator reaches the end of the list
+        if (it != trip.end()) 
+        {
+            // Display the goat
+            cout << "\t[" << i++ << "] "
+                 << it->get_name()
+                 << " (" << it->get_age()
+                 << ", " << it->get_color() << ")\n";
+
+            ++it; // move to next element for the next search
+        }
+    }
+
+    // Check how many times i was incremented
+    if (i == 1)
+    {
+        // Display a message
+        cout << "No goats with the name " << name << " were found!" << endl;
+    }
+}
+
+/*
+    averageAge()
+    Calculates the average age of all the goat objects
+    Arguments:
+        - trip: the list of Goat objects (passed by const reference)
+    Return: none
+*/
+void averageAge(const list<Goat> &trip)
+{
+    // Use accumulate() to find the sum of the goats' age
+    int sum = accumulate(trip.begin(), trip.end(), 0, [](int n, const Goat &g)
+    {
+        return n + g.get_age();
+    });
+
+    // Display a message
+    cout << "The average age of the goat trip is: " << (double) sum / (double) trip.size();
 }
