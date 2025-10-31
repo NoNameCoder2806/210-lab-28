@@ -32,6 +32,7 @@ void countAboveAge(const list<Goat> &trip);
 void increaseAge(list<Goat> &trip);
 void searchNames(const list<Goat> &trip);
 void averageAge(const list<Goat> &trip);
+void displayReversed(const list<Goat> &trip);
 
 // Main function
 int main()
@@ -177,6 +178,11 @@ int main()
 
             // Display the Goat objects in reversed order
             case 12:
+            {
+                cout << "Display the goats in reversed order.\n";
+                displayReversed(trip);
+                break;
+            }
 
             // Other invalid choices
             default:
@@ -634,4 +640,28 @@ void averageAge(const list<Goat> &trip)
 
     // Display a message
     cout << "The average age of the goat trip is: " << (double) sum / (double) trip.size() << endl;
+}
+
+/*
+    displayReversed()
+    Display the goat trip in reversed order
+    Arguments:
+        - trip: the list of Goat objects (passed by const reference)
+    Return: none
+*/
+void displayReversed(const list<Goat> &trip)
+{
+    // Create a counter
+    int i = 1;
+
+    // Display the goat list in reversed order using for_each(), rbegin() and rend()
+    // The & in [&] means the lambda will capture all the local variables by reference (in this function)
+    for_each(trip.rbegin(), trip.rend(), [&](const Goat &g)
+    {
+        // Display the goats
+        cout << "\t[" << i++ << "] "
+             << g.get_name()
+             << " (" << g.get_age()
+             << ", " << g.get_color() << ")\n";
+    });
 }
