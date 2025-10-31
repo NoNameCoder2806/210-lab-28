@@ -26,6 +26,7 @@ void sortNames(list<Goat> &trip);
 void sortAge(list<Goat> &trip);
 void displayYoungest(const list<Goat> &trip);
 void displayOldest(const list<Goat> &trip);
+void countAboveAge(const list<Goat> &trip);
 
 // Main function
 int main()
@@ -138,6 +139,12 @@ int main()
             }
 
             // Count Goat objects above a certain age
+            case 8:
+            {
+                cout << "Count and display goats above a certain age.\n";
+                countAboveAge(trip);
+                break;
+            }
 
             // Increase all Goat objects' age by 1
 
@@ -432,4 +439,16 @@ void displayOldest(const list<Goat> &trip)
                 << ", " << g.get_color() << ")\n";
         }
     }
+}
+
+/*
+    countAboveAge()
+    Counts and display all the goats above a certain age
+    Arguments:
+        - trip: the list of Goat objects (passed by const reference)
+    Return: none
+*/
+void countAboveAge(const list<Goat> &trip)
+{
+
 }
